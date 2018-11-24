@@ -1,0 +1,25 @@
+<input type="file" accept='image/*' />
+
+<img id="output" />
+
+
+<script>
+    const output = document.querySelector('#output');
+    output.style.display = 'none'
+    const file = document.querySelector('input[type=file]');
+    file.addEventListener('change', e => {
+        console.log(`converting ${e.target.value}`)
+        encodeImageFileAsURL(e.target)
+    })
+    function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            console.log('RESULT', reader.result);
+            output.src = reader.result;
+            output.style.display = 'inline'
+
+        }
+        reader.readAsDataURL(file);
+    }
+</script>
